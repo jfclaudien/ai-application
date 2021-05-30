@@ -1,8 +1,6 @@
-
+# Optimisation d'un processus business (Warehouse)
 # Importing the libraries
 import numpy as np
-
-
 
 # Params
 alpha = 0.9
@@ -12,7 +10,6 @@ gamma = 0.75
 # I- Defining the environment
 
 # States
-
 location_to_state = {
         'A': 0,
         'B': 1,
@@ -31,22 +28,12 @@ location_to_state = {
 state_to_location = {state: location for location, state in location_to_state.items()}
 
 # Actions
-
 actions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-# Rewards
-
-
-
-
-# II- Defining the environment
-
-# Q-Values Initialisation
-
-# III- Defining the environment
 
 def route(starting_location, ending_location):
     
+    # Rewards
     R = np.array([
         [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
@@ -64,7 +51,7 @@ def route(starting_location, ending_location):
     ending_state = location_to_state[ending_location]
     R[ending_state, ending_state] = 1000
     
-    
+    # Q-Values Initialisation
     Q = np.zeros([12, 12])
     for _ in range(1000):
         current_state = np.random.randint(0, 12)
@@ -78,7 +65,7 @@ def route(starting_location, ending_location):
         
         TD = R[current_state, next_state] + gamma * Q[next_state, np.argmax(Q[next_state, ])] - Q[current_state, next_state]
         
-        # Bellman equation
+        # Equation de Bellman 
         Q[current_state, next_state] = Q[current_state, next_state] + alpha * TD
 
     
